@@ -1,13 +1,22 @@
-const songs = ["Test1.mp3", "Test2.mp3", "Test3.mp3", "Test4.mp3"];
-let shuffledSongs = [...songs].sort(() => Math.random() - 0.5); // Shuffle the playlist
+const songs = ["Sleep1.mp3", "Sleep2.mp3", "Sleep3.mp3", "Sleep4.mp3"];
+let shuffledSongs = [...songs].sort(() => Math.random() - 0.5);
 let currentSong = 0;
-const player = document.getElementById("musicPlayer");
+const player = new Audio(); // Create an audio object
+
+function playSong(song) {
+    fetch(song)
+        .then(response => response.blob()) // Convert file into a playable format
+        .then(blob => {
+            player.src = URL.createObjectURL(blob);
+            player.play();
+        })
+        .catch(error => console.log("Error loading file:", error));
+}
 
 player.addEventListener("ended", () => {
-    currentSong = (currentSong + 1) % shuffledSongs.length; // Loop through shuffled playlist
-    player.src = shuffledSongs[currentSong];
-    player.play();
+    currentSong = (currentSong + 1) % shuffledSongs.length;
+    playSong(shuffledSongs[currentSong]); // Load the next song
 });
 
-player.play(); // Start playing when the page loads
-player.play().catch(error => console.log("Autoplay blocked, user must interact first."));
+// Start playing
+playSong(shuffledSongs[currentSong]);
