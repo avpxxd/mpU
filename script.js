@@ -1,4 +1,4 @@
-const songs = ["Sleep1.mp3", "Sleep2.mp3", "Sleep3.mp3", "Sleep4.mp3"];
+const songs = ["Sleep1.aac", "Sleep3.aac"];
 let shuffledSongs = [...songs].sort(() => Math.random() - 0.5);
 let currentSong = 0;
 const player = new Audio(); // Create an audio object
