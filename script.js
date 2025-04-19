@@ -1,10 +1,11 @@
 const songs = ["song1.mp3", "song2.mp3", "song3.mp3"];
+let shuffledSongs = [...songs].sort(() => Math.random() - 0.5); // Shuffle the playlist
 let currentSong = 0;
 const player = document.getElementById("musicPlayer");
 
 player.addEventListener("ended", () => {
-    currentSong = (currentSong + 1) % songs.length; // Loops playlist
-    player.src = songs[currentSong];
+    currentSong = (currentSong + 1) % shuffledSongs.length; // Loop through shuffled playlist
+    player.src = shuffledSongs[currentSong];
     player.play();
 });
 
