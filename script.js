@@ -10,3 +10,4 @@ player.addEventListener("ended", () => {
 });
 
 player.play(); // Start playing when the page loads
+player.play().catch(error => console.log("Autoplay blocked, user must interact first."));
